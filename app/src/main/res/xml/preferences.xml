@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:key="enable_overlay"
+        android:title="Ativar Overlay"
+        android:summary="Exibir overlay ao pressionar botões"
+        android:defaultValue="true" />
+
+    <EditTextPreference
+        android:key="overlay_duration"
+        android:title="Duração do Overlay"
+        android:summary="Tempo de exibição do overlay em milissegundos"
+        android:defaultValue="500"
+        android:inputType="number" />
+</PreferenceScreen>

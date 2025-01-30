@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ButtonOverlayApp</string>
+    <string name="enable_accessibility_service">Enable Accessibility Service</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="app_running_in_background">App Running in Background</string>
+    <string name="configura_es_do_overlay">Configurações do Overlay</string>
+    <string name="accessibility_service_name" />
+    <string name="accessibility_service_description" />
+    <string name="settings_activity_title">Configurações</string>
 </resources>

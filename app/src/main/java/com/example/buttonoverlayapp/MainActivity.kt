@@ -1,47 +1,75 @@
 package com.example.buttonoverlayapp
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.buttonoverlayapp.ui.theme.ButtonOverlayAppTheme
+import android.provider.Settings
+import androidx.appcompat.app.AppCompatActivity
+import com.example.buttonoverlayapp.databinding.ActivityMainBinding
+import com.example.buttonoverlayapp.services.ButtonListenerService
+import android.app.AlertDialog
+import android.net.Uri
+import com.example.buttonoverlayapp.services.OverlayService
+import com.example.buttonoverlayapp.ui.activities.SettingsActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ButtonOverlayAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//
+//        setupButtons()
+//        startButtonService()
+//        checkOverlayPermission()
+    }
+
+    private fun setupButtons() {
+        binding.btnSettings.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+        }
+
+        binding.btnEnableAccessibility.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+        }
+    }
+
+    private fun startButtonService() {
+        val serviceIntent = Intent(this, ButtonListenerService::class.java)
+        startService(serviceIntent)
+    }
+
+    private fun checkOverlayPermission() {
+        if (!Settings.canDrawOverlays(this)) {
+            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION).apply {
+                data = Uri.parse("package:$packageName")
+                startActivity(this)
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ButtonOverlayAppTheme {
-        Greeting("Android")
+    override fun onResume() {
+        super.onResume()
+        OverlayService.hideAllOverlays()
     }
+
+    fun checkAccessibilityService() {
+        val serviceEnabled = Settings.Secure.getInt(
+            contentResolver,
+            Settings.Secure.ACCESSIBILITY_ENABLED
+        ) == 1
+
+        if (!serviceEnabled) {
+            AlertDialog.Builder(this)
+                .setTitle("Ativar Serviço de Acessibilidade")
+                .setMessage("Por favor, ative o serviço nas configurações de acessibilidade")
+                .setPositiveButton("Abrir Configurações") { _, _ ->
+                    startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                }
+                .show()
+        }
+    }
+
+
 }

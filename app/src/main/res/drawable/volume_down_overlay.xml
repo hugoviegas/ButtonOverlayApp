@@ -1,0 +1,6 @@
+<!-- volume_up_overlay.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#80000000"/>
+    <size android:width="40dp" android:height="40dp"/>
+</shape>
