@@ -1,15 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <SwitchPreference
-        android:key="enable_overlay"
-        android:title="Ativar Overlay"
-        android:summary="Exibir overlay ao pressionar botões"
-        android:defaultValue="true" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditTextPreference
-        android:key="overlay_duration"
-        android:title="Duração do Overlay"
-        android:summary="Tempo de exibição do overlay em milissegundos"
-        android:defaultValue="500"
-        android:inputType="number" />
+    <PreferenceCategory android:title="Volume Up Button">
+        <SeekBarPreference
+            android:key="volume_up_width"
+            android:title="Width"
+            android:max="100"
+            android:defaultValue="50"
+            app:showSeekBarValue="true"/>
+        <SeekBarPreference
+            android:key="volume_up_height"
+            android:title="Height"
+            android:max="500"
+            android:defaultValue="100"
+            app:showSeekBarValue="true"/>
+        <SeekBarPreference
+            android:key="volume_up_position"
+            android:title="Vertical Position"
+            android:max="1000"
+            android:defaultValue="50"
+            app:showSeekBarValue="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Volume Down Button">
+        <SeekBarPreference
+            android:key="volume_down_width"
+            android:title="Width"
+            android:max="100"
+            android:defaultValue="50"
+            app:showSeekBarValue="true"/>
+        <SeekBarPreference
+            android:key="volume_down_height"
+            android:title="Height"
+            android:max="500"
+            android:defaultValue="100"
+            app:showSeekBarValue="true"/>
+        <SeekBarPreference
+            android:key="volume_down_position"
+            android:title="Vertical Position"
+            android:max="1000"
+            android:defaultValue="50"
+            app:showSeekBarValue="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="General Settings">
+        <SeekBarPreference
+            android:key="overlay_duration"
+            android:title="Overlay Duration (ms)"
+            android:max="2000"
+            android:defaultValue="500"
+            app:showSeekBarValue="true"/>
+    </PreferenceCategory>
 </PreferenceScreen>

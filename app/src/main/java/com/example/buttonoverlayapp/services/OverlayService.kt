@@ -34,9 +34,7 @@ object OverlayService {
 
             hideAllOverlays()
 
-            overlayView = OverlayView(context).apply {
-                setButtonType(buttonType)
-            }
+            overlayView = OverlayView(context)
 
             windowManager?.addView(overlayView, params)
             Log.d(TAG, "Overlay exibido para o botão: $buttonType")

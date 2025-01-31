@@ -29,5 +29,23 @@
             </intent-filter>
         </activity>
 
+        <!--settings activity -->
+        <activity
+            android:name=".ui.activities.SettingsActivity"
+            android:label="@string/settings_activity_title"
+            android:parentActivityName=".MainActivity"/>
+
+        <service
+            android:name=".ButtonOverlayAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config"/>
+        </service>
+
     </application>
 </manifest>

@@ -7,4 +7,5 @@
     <string name="accessibility_service_name" />
     <string name="accessibility_service_description" />
     <string name="settings_activity_title">Configurações</string>
+    <string name="volume_down_overlay">Volume Down Overlay</string>
 </resources>
